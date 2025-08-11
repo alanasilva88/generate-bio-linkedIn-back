@@ -1,0 +1,28 @@
+# Exclui a pasta de módulos Node
+/node_modules/
+
+# Exclui o arquivo de variáveis de ambiente
+.env
+
+# Exclui a pasta de build do Vite (onde a aplicação final é gerada)
+/dist/
+
+# Exclui arquivos de log de debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Exclui caches do npm/yarn
+.npm/
+.npmrc
+.yarn/
+.yarnrc
+
+# Exclui arquivos de cache do sistema operacional (macOS)
+.DS_Store
+
+# Exclui arquivos de cache do editor de código (VS Code, por exemplo)
+.vscode/
+
+# Exclui o arquivo de backup do Vite (se configurado)
+.vite-cache/
