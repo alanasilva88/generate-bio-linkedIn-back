@@ -45,7 +45,7 @@ Certifique-se de ter o [Node.js](https://nodejs.org/en/download/) e o [npm](http
     ```bash
     git clone https://github.com/alanasilva88/generate-bio-linkedIn-back.git
     ```
-2.  Navegue até a pasta do back-end (`/generate-bio` ou o nome que você deu):
+2.  Navegue até a pasta do back-end (`/generate-bio`):
     ```bash
     cd generate-bio
     ```
