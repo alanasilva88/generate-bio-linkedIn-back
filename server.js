@@ -21,15 +21,42 @@ app.post('/generate-bio', async (req, res) => {
 
     try {
         const chatCompletion = await openai.chat.completions.create({
-            model: 'gpt-3.5-turbo',
-            messages: [{ role: 'user', content: prompt }],
+            model: 'gpt-4o-mini',
+            temperature: 0.5, // Menos criatividade, mais foco
+            messages: [{
+                role: 'system',
+                content: "Você é um especialista em escrita para LinkedIn. Sua tarefa é criar uma biografia profissional e impactante de no máximo 3 frases, usando o tom de voz do usuário."
+            },
+            {
+                role: 'user',
+                content: prompt
+            },],
         });
 
         const bioGerada = chatCompletion.choices[0].message.content;
         res.json({ bio: bioGerada });
     } catch (error) {
-        console.error('Erro ao chamar a API da OpenAI: ', error.response ? error.response.data : error.message);
-        res.status(500).json({ error: 'Falha ao gerar a bio. Tente novamente' });
+        let statusCode = 500;
+        let errorMessage = 'Falha ao gerar a bio. Tente novamente.';
+
+        statusCode = error.status || error.response?.status || 500;
+
+        // Tenta usar a mensagem específica da OpenAI
+        if (error.message) {
+            // Se houver uma mensagem da API (que é o caso do erro 403/429), use-a como fallback
+            errorMessage = error.message;
+        }
+
+        // Verifica se é um erro da OpenAI com resposta HTTP
+        if (statusCode === 401) {
+            errorMessage = 'Erro de autenticação (API Key inválida).';
+        } else if (statusCode === 403 || statusCode === 429) {
+            errorMessage = 'Acesso negado ou Limite de Uso Atingido. Verifique seus créditos e faturamento na plataforma OpenAI.';
+        }
+
+        console.error(`Erro na API da OpenAI: ${statusCode} - ${error.message}`);
+        res.status(statusCode).json({ error: errorMessage });
+
     }
 });
 
