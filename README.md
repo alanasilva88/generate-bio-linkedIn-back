@@ -56,6 +56,7 @@ Certifique-se de ter o [Node.js](https://nodejs.org/en/download/) e o [npm](http
 4.  Crie um arquivo `.env` na raiz da pasta do back-end com sua chave da API da OpenAI:
     ```
     OPENAI_API_KEY="sua_chave_secreta_aqui"
+    OPENAI_MODEL=gpt-4o-mini ou outro modelo que você preferir
     ```
 5.  Inicie o servidor:
     ```bash
