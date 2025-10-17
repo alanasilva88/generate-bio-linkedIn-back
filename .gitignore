@@ -27,5 +27,3 @@ yarn-error.log*
 # Exclui o arquivo de backup do Vite (se configurado)
 .vite-cache/
 
-# Teste
-.test-simple.js
