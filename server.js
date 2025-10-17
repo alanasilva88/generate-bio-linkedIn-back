@@ -21,8 +21,9 @@ app.post('/generate-bio', async (req, res) => {
 
     try {
         const chatCompletion = await openai.chat.completions.create({
-            model: 'gpt-4o-mini',
+            model: process.env.OPENAI_MODEL,
             temperature: 0.5, // Menos criatividade, mais foco
+            max_tokens: 150, // Limite a resposta a 150 tokens (ideal para 3 frases)
             messages: [{
                 role: 'system',
                 content: "Você é um especialista em escrita para LinkedIn. Sua tarefa é criar uma biografia profissional e impactante de no máximo 3 frases, usando o tom de voz do usuário."
